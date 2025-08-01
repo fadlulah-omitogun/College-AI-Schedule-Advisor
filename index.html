@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Transcript Collector</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h1>UMBC AI Schedule Advisor</h1>
+
+<form id="dataForm">
+    <label for="transcript">Upload Transcript (PDF):</label>
+    <input type="file" id="transcript" accept="application/pdf" required />
+
+    <label for="majorReq">Upload Major Requirements (PDF):</label>
+    <input type="file" id="majorReq" accept="application/pdf" required />
+
+    <label for="career">Career Interests:</label>
+    <textarea id="career" rows="4"
+              placeholder="e.g., Software Engineering, Data Science"
+              required></textarea>
+
+    <button type="submit">Save Data</button>
+</form>
+
+<div id="pdfPreviewContainer" style="display: none;">
+    <h3>Transcript Preview:</h3>
+    <embed id="pdfPreview" type="application/pdf" />
+</div>
+
+<div id="majorReqPreviewContainer" style="display: none; margin-top: 2rem;">
+    <h3>Major Requirements Preview:</h3>
+    <embed id="majorReqPreview" type="application/pdf" />
+</div>
+
+<div id="downloadSection" style="display: none;">
+    <h3>Verify Your Data</h3>
+    <button id="downloadBtn">Download Saved Data</button>
+</div>
+
+<p id="status"></p>
+
+<script src="main.js"></script>
+</body>
+</html>
