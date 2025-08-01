@@ -1,0 +1,102 @@
+/* 1. Base & Layout */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+/* 2. Form Styling */
+form {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+input[type="file"],
+textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* 3. Buttons */
+button[type="submit"],
+#downloadBtn {
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover,
+#downloadBtn:hover {
+    background-color: #005a9e;
+}
+
+/* 4. Preview & Download Sections */
+#pdfPreviewContainer,
+#downloadSection {
+    max-width: 600px;
+    margin: 2rem auto 0 auto;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+#pdfPreviewContainer h3,
+#downloadSection h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+embed {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 5. Status Message */
+#status {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-weight: 500;
+}
+
+/* 6. Responsive Tweak */
+@media (min-width: 640px) {
+    /* keep form nice and narrow on desktop */
+    form,
+    #pdfPreviewContainer,
+    #downloadSection {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
