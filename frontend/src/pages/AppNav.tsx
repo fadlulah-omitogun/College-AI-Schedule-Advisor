@@ -1,4 +1,4 @@
-import { Button } from "./ui/button.tsx";
+import { Button } from "../components/ui/button";
 import { LayoutDashboard, BookOpen, Target, ListTodo, MessageSquare } from "lucide-react";
 import logo from "../assets/logo.png";
 

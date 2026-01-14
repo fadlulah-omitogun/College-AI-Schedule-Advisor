@@ -1,11 +1,11 @@
 import { useState } from "react";
-import AppNav from "../components/AppNav.tsx";
-import { Card } from "../compenents/ui/card.tsx";
-import { Button } from "./ui/button";
-import { Progress } from "./ui/progress";
-import { Switch } from "./ui/switch";
-import { Label } from "./ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import AppNav from "../components/AppNav";
+import { Card } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Progress } from "../components/ui/progress";
+import { Switch } from "../components/ui/switch";
+import { Label } from "../components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { CheckCircle2, Circle, Clock, BookOpen } from "lucide-react";
 
 type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
