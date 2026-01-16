@@ -17,7 +17,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={logo} alt="College Advisor AI" className="size-10" />
-            <span className="text-lg">College Advisor AI</span>
+            <span className="text-lg">ThinkPath</span>
           </div>
           <div className="flex gap-2">
             <Button variant="ghost" onClick={() => onNavigate("login")}>
