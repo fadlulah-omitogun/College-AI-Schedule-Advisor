@@ -29,8 +29,8 @@ export default function AuthPage({ mode, onAuth, onNavigate }: AuthPageProps) {
       <Card className="w-full max-w-md p-8">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          <img src={logo} alt="College Advisor AI" className="size-12" />
-          <span className="text-xl">College Advisor AI</span>
+          <img src={logo} alt="ThinkPath" className="size-12" />
+          <span className="text-xl">ThinkPath</span>
         </div>
 
         {/* Title */}
