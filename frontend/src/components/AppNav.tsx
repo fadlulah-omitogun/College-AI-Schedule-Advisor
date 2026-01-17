@@ -24,8 +24,8 @@ export default function AppNav({ currentRoute, onNavigate }: AppNavProps) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <img src={logo} alt="College Advisor AI" className="size-8" />
-            <span className="text-lg">College Advisor AI</span>
+            <img src={logo} alt="ThinkPath" className="size-8" />
+            <span className="text-lg">ThinkPath</span>
           </div>
 
           {/* Navigation */}
