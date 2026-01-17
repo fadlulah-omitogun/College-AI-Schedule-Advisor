@@ -2,6 +2,8 @@ import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { CheckCircle2, Target, Shield } from "lucide-react";
 import logo from "../assets/logo.png";
+import Banner from "../assets/landingBanner.png";
+
 
 type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
 
@@ -31,49 +33,72 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight">
-            Your personalized academic + career plan that{" "}
-            <span className="text-cyan-600">updates when life changes</span>
-          </h1>
-          
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get a clear roadmap from day one to graduation and beyond. Always know what to do next.
-          </p>
+      <section className="relative">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${Banner})` }}
+          aria-hidden="true"
+        />
+        {/* Dark overlay (adjust opacity to taste) */}
+        <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
-          <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
-            <div className="flex gap-3">
-              <CheckCircle2 className="size-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm">Semester-by-semester roadmap based on your major + prereqs</p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="size-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm">Career plan for your target role</p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="size-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm">Weekly tasks so you always know what to do next</p>
-              </div>
-            </div>
-          </div>
+        {/* Content */}
+        <div className="relative container mx-auto px-4 py-16 md:py-24">
+          <div className="max-w-4xl mx-auto text-center space-y-6 text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight">
+              Your personalized academic + career plan that{" "}
+              <span className="text-cyan-300">updates when life changes</span>
+            </h1>
 
-          <div className="pt-8">
-            <Button 
-              size="lg" 
-              className="h-12 px-8"
-              onClick={() => onNavigate("signup")}
-            >
-              Create my plan
-            </Button>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              Get a clear roadmap from day one to graduation and beyond. Always know what to do next.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
+              <div className="flex gap-3">
+                <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-white/95">
+                    Semester-by-semester roadmap based on your major + prereqs
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-white/95">Career plan for your target role</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-white/95">Weekly tasks so you always know what to do next</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8 flex items-center justify-center gap-3">
+              <Button
+                size="lg"
+                className="h-12 px-8"
+                onClick={() => onNavigate("signup")}
+              >
+                Create my plan
+              </Button>
+              <Button
+                size="lg"
+                variant="secondary"
+                className="h-12 px-8"
+                onClick={() => onNavigate("login")}
+              >
+                Log in
+              </Button>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* Demo Preview */}
       <section className="container mx-auto px-4 py-16">
