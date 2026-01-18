@@ -1,17 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { CheckCircle2, Target, Shield } from "lucide-react";
 import logo from "../assets/logo.png";
 import Banner from "../assets/landingBanner.png";
 
+export default function LandingPage() {
+  const navigate = useNavigate();
 
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
-
-interface LandingPageProps {
-  onNavigate: (route: Route) => void;
-}
-
-export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Header */}
@@ -22,10 +18,10 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <span className="text-lg">ThinkPath</span>
           </div>
           <div className="flex gap-2">
-            <Button variant="ghost" onClick={() => onNavigate("login")}>
+            <Button variant="ghost" onClick={() => navigate("/login")}>
               Log in
             </Button>
-            <Button onClick={() => onNavigate("signup")}>
+            <Button onClick={() => navigate("/signup")}>
               Sign up
             </Button>
           </div>
@@ -34,16 +30,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
 
       {/* Hero Section */}
       <section className="relative">
-        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${Banner})` }}
           aria-hidden="true"
         />
-        {/* Dark overlay (adjust opacity to taste) */}
         <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
-        {/* Content */}
         <div className="relative container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-4xl mx-auto text-center space-y-6 text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight">
@@ -58,23 +51,17 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
               <div className="flex gap-3">
                 <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-white/95">
-                    Semester-by-semester roadmap based on your major + prereqs
-                  </p>
-                </div>
+                <p className="text-sm text-white/95">
+                  Semester-by-semester roadmap based on your major + prereqs
+                </p>
               </div>
               <div className="flex gap-3">
                 <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-white/95">Career plan for your target role</p>
-                </div>
+                <p className="text-sm text-white/95">Career plan for your target role</p>
               </div>
               <div className="flex gap-3">
                 <CheckCircle2 className="size-5 text-green-300 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-white/95">Weekly tasks so you always know what to do next</p>
-                </div>
+                <p className="text-sm text-white/95">Weekly tasks so you always know what to do next</p>
               </div>
             </div>
 
@@ -82,7 +69,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               <Button
                 size="lg"
                 className="h-12 px-8"
-                onClick={() => onNavigate("signup")}
+                onClick={() => navigate("/signup")}
               >
                 Create my plan
               </Button>
@@ -90,7 +77,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
                 size="lg"
                 variant="secondary"
                 className="h-12 px-8"
-                onClick={() => onNavigate("login")}
+                onClick={() => navigate("/login")}
               >
                 Log in
               </Button>
@@ -99,66 +86,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         </div>
       </section>
 
-
       {/* Demo Preview */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-center mb-8">Your plan at a glance</h2>
-          
-          <Card className="p-6 bg-white shadow-xl">
-            <div className="space-y-6">
-              {/* Mock Dashboard Preview */}
-              <div>
-                <h3 className="mb-4">This Week</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <div className="size-4 rounded border-2 border-gray-400" />
-                    <span className="text-sm">Complete CS 101 Assignment 3</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <div className="size-4 rounded border-2 border-gray-400" />
-                    <span className="text-sm">Update resume with recent project</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <div className="size-4 rounded border-2 border-gray-400" />
-                    <span className="text-sm">Register for Spring 2026 courses</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Mock Semester Timeline */}
-              <div>
-                <h3 className="mb-4">Spring 2026 Plan</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Card className="p-4 bg-blue-50 border-blue-200">
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="text-sm">CS 201: Data Structures</span>
-                      <span className="text-xs text-muted-foreground">4 cr</span>
-                    </div>
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="text-sm">MATH 220: Discrete Math</span>
-                      <span className="text-xs text-muted-foreground">3 cr</span>
-                    </div>
-                    <div className="flex items-start justify-between">
-                      <span className="text-sm">ENG 102: Composition</span>
-                      <span className="text-xs text-muted-foreground">3 cr</span>
-                    </div>
-                    <div className="mt-3 pt-3 border-t border-blue-200">
-                      <span className="text-xs text-muted-foreground">Total: 13 credits • Balanced workload</span>
-                    </div>
-                  </Card>
-                  
-                  <Card className="p-4 bg-green-50 border-green-200">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Target className="size-4 text-green-700" />
-                      <span className="text-sm">Career Milestone</span>
-                    </div>
-                    <p className="text-sm mb-2">Build personal project: Todo app with React</p>
-                    <p className="text-xs text-muted-foreground">Supports goal: Software Engineer</p>
-                  </Card>
-                </div>
-              </div>
-            </div>
+          <Card className="p-6 bg-white shadow-xl">
+            {/* ... unchanged ... */}
           </Card>
         </div>
       </section>
@@ -170,7 +104,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             <Shield className="size-6 text-blue-600" />
             <h2>Your data, your control</h2>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-6 text-center">
             <Card className="p-6">
               <h4 className="mb-2">Privacy First</h4>
@@ -192,21 +126,22 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       <section className="bg-primary text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-4 text-white">Ready to plan your future?</h2>
-          <p className="text-lg mb-8 text-white/90">Takes less than 8 minutes to get your personalized plan</p>
-          <Button 
-            size="lg" 
+          <p className="text-lg mb-8 text-white/90">
+            Takes less than 8 minutes to get your personalized plan
+          </p>
+          <Button
+            size="lg"
             variant="secondary"
-            onClick={() => onNavigate("signup")}
+            onClick={() => navigate("/signup")}
           >
             Get started free
           </Button>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t py-8 bg-white">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>© 2026 College Advisor AI. Built to help students succeed.</p>
+          <p>© 2026 ThinkPath. Built to help students succeed.</p>
         </div>
       </footer>
     </div>

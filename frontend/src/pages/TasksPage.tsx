@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AppNav from "../components/AppNav";
+import AppNav from "./AppNav";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -11,11 +11,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
 
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
+// type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
 
-interface TasksPageProps {
-  onNavigate: (route: Route) => void;
-}
+// interface TasksPageProps {
+//   onNavigate: (route: Route) => void;
+// }
 
 interface Task {
   id: string;
@@ -27,7 +27,7 @@ interface Task {
   week: "current" | "backlog";
 }
 
-export default function TasksPage({ onNavigate }: TasksPageProps) {
+export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: "1",
@@ -140,7 +140,7 @@ export default function TasksPage({ onNavigate }: TasksPageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <AppNav currentRoute="tasks" onNavigate={onNavigate} />
+      <AppNav/>
 
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
