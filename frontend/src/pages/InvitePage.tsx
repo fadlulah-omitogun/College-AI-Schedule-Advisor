@@ -3,7 +3,7 @@ import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import AppNav from "../components/AppNav";
+// import AppNav from "../components/AppNav";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -50,7 +50,7 @@ export default function InvitePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Optional: you can hide AppNav here if you want */}
-      <AppNav />
+      {/* <AppNav /> */}
 
       <div className="container mx-auto px-4 py-10">
         <div className="max-w-md mx-auto">
