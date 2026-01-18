@@ -3,12 +3,7 @@ import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Progress } from "../components/ui/progress";
 import { CheckCircle2, Circle, Target, Lightbulb, TrendingUp } from "lucide-react";
-
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
-
-interface CareerPlanProps {
-  onNavigate: (route: Route) => void;
-}
+import { useNavigate } from "react-router-dom";
 
 interface Milestone {
   id: string;
@@ -18,9 +13,10 @@ interface Milestone {
   priority: "high" | "medium" | "low";
 }
 
-export default function CareerPlan({ onNavigate }: CareerPlanProps) {
+export default function CareerPlan() {
   const targetRole = "Software Engineer";
   const targetIndustry = "Tech / Startups";
+  const navigate = useNavigate();
 
   const milestones: Milestone[] = [
     // Resume/LinkedIn
@@ -76,7 +72,7 @@ export default function CareerPlan({ onNavigate }: CareerPlanProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <AppNav currentRoute="plan/career" onNavigate={onNavigate} />
+      <AppNav />
 
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
@@ -124,7 +120,7 @@ export default function CareerPlan({ onNavigate }: CareerPlanProps) {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  onClick={() => onNavigate("tasks")}
+                  onClick={() => navigate("/app/tasks")}
                 >
                   Generate tasks
                 </Button>

@@ -7,12 +7,8 @@ import { Switch } from "../components/ui/switch";
 import { Label } from "../components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { CheckCircle2, Circle, Clock, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
-
-interface AcademicPlanProps {
-  onNavigate: (route: Route) => void;
-}
 
 interface Course {
   code: string;
@@ -28,10 +24,10 @@ interface Semester {
   workload: "light" | "balanced" | "heavy";
 }
 
-export default function AcademicPlan({ onNavigate }: AcademicPlanProps) {
+export default function AcademicPlan() {
   const [maxCreditsMode, setMaxCreditsMode] = useState(false);
   const [lighterWorkload, setLighterWorkload] = useState(false);
-
+  const navigate = useNavigate();
   // Mock semester data
   const semesters: Semester[] = [
     {
@@ -138,7 +134,7 @@ export default function AcademicPlan({ onNavigate }: AcademicPlanProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <AppNav currentRoute="plan/academics" onNavigate={onNavigate} />
+      <AppNav />
 
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

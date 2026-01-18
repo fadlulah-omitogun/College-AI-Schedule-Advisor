@@ -5,12 +5,10 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { ScrollArea } from "../components/ui/scroll-area";
 import { Send, Bot, User, Info } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
+// type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
 
-interface AdvisorChatProps {
-  onNavigate: (route: Route) => void;
-}
 
 interface Message {
   id: string;
@@ -19,7 +17,8 @@ interface Message {
   timestamp: Date;
 }
 
-export default function AdvisorChat({ onNavigate }: AdvisorChatProps) {
+export default function AdvisorChat() {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -105,7 +104,7 @@ export default function AdvisorChat({ onNavigate }: AdvisorChatProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <AppNav currentRoute="chat" onNavigate={onNavigate} />
+      <AppNav />
 
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

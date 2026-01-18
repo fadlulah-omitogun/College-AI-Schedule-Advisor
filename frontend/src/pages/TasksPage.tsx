@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AppNav from "./AppNav";
+import AppNav from "../components/AppNav";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -11,11 +11,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
 
-// type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
-
-// interface TasksPageProps {
-//   onNavigate: (route: Route) => void;
-// }
 
 interface Task {
   id: string;

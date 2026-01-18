@@ -1,17 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import AppNav from "../components/AppNav";
 import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
 import { Progress } from "../components/ui/progress";
 import { Alert, AlertDescription } from "../components/ui/alert";
-import { AlertCircle, Calendar, BookOpen, RefreshCw, CheckCircle2, TrendingUp } from "lucide-react";
-
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
-
-interface DashboardProps {
-  onNavigate: (route: Route) => void;
-}
+import { AlertCircle, Calendar, BookOpen, RefreshCw, TrendingUp } from "lucide-react";
 
 interface Task {
   id: string;
@@ -20,7 +16,9 @@ interface Task {
   type: "academic" | "career" | "deadline";
 }
 
-export default function Dashboard({ onNavigate }: DashboardProps) {
+export default function Dashboard() {
+  const navigate = useNavigate();
+
   const [tasks, setTasks] = useState<Task[]>([
     { id: "1", title: "Complete CS 201 Assignment 4 - Binary Trees", completed: false, type: "academic" },
     { id: "2", title: "Update resume with recent Python project", completed: false, type: "career" },
@@ -30,7 +28,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
   ]);
 
   const toggleTask = (id: string) => {
-    setTasks(tasks.map(task => 
+    setTasks(tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
   };
@@ -38,27 +36,23 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
   const completedTasks = tasks.filter(t => t.completed).length;
   const totalTasks = tasks.length;
 
-  // Mock data
-  const degreeProgress = 62; // percentage
-  const careerReadiness = 45; // percentage
+  const degreeProgress = 62;
+  const careerReadiness = 45;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      <AppNav currentRoute="dashboard" onNavigate={onNavigate} />
+      <AppNav />
 
       <div className="container mx-auto px-4 py-8">
-        {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="mb-2">Welcome back, Alex</h1>
+          <h1 className="mb-2">Welcome back</h1>
           <p className="text-muted-foreground">
             Here's what's happening with your plan this week
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left Column - Tasks */}
           <div className="lg:col-span-2 space-y-6">
-            {/* This Week Tasks */}
             <Card className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -67,7 +61,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
                     {completedTasks} of {totalTasks} completed
                   </p>
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => onNavigate("tasks")}>
+                <Button variant="ghost" size="sm" onClick={() => navigate("/app/tasks")}>
                   View all
                 </Button>
               </div>
@@ -104,10 +98,9 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
               </div>
             </Card>
 
-            {/* Alerts */}
             <Card className="p-6">
               <h3 className="mb-4">Alerts & Reminders</h3>
-              
+
               <div className="space-y-3">
                 <Alert className="border-orange-200 bg-orange-50">
                   <AlertCircle className="size-4 text-orange-600" />
@@ -132,18 +125,13 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
               </div>
             </Card>
 
-            {/* Next Semester Recommendation */}
             <Card className="p-6 bg-gradient-to-br from-cyan-50 to-blue-50 border-cyan-200">
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <h3 className="mb-1">Spring 2026 Recommendation</h3>
                   <p className="text-sm text-muted-foreground">Based on your preferences and progress</p>
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => onNavigate("plan/academics")}
-                >
+                <Button variant="ghost" size="sm" onClick={() => navigate("/app/plan/academics")}>
                   View plan
                 </Button>
               </div>
@@ -175,9 +163,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
             </Card>
           </div>
 
-          {/* Right Column - Progress & Quick Actions */}
           <div className="space-y-6">
-            {/* Progress Card */}
             <Card className="p-6">
               <h3 className="mb-6">Your Progress</h3>
 
@@ -204,10 +190,10 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
                   </p>
                 </div>
 
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full justify-start gap-2"
-                  onClick={() => onNavigate("plan/career")}
+                  onClick={() => navigate("/app/plan/career")}
                 >
                   <TrendingUp className="size-4" />
                   View career plan
@@ -215,31 +201,6 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
               </div>
             </Card>
 
-            {/* Quick Stats */}
-            <Card className="p-6">
-              <h4 className="mb-4">Quick Stats</h4>
-              
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Current Semester</span>
-                  <span className="text-sm">Spring 2026</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Current Credits</span>
-                  <span className="text-sm">15 credits</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Target Graduation</span>
-                  <span className="text-sm">May 2027</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">GPA Goal</span>
-                  <span className="text-sm">3.5+</span>
-                </div>
-              </div>
-            </Card>
-
-            {/* Regenerate Plan */}
             <Card className="p-6 bg-gray-50">
               <div className="flex items-start gap-3 mb-3">
                 <RefreshCw className="size-5 text-muted-foreground flex-shrink-0 mt-0.5" />

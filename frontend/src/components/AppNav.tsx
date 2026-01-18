@@ -1,44 +1,58 @@
-import { Button } from "./ui/button.tsx";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../components/ui/button";
 import { LayoutDashboard, BookOpen, Target, ListTodo, MessageSquare } from "lucide-react";
 import logo from "../assets/logo.png";
 
-type Route = "landing" | "login" | "signup" | "onboarding" | "dashboard" | "plan/academics" | "plan/career" | "tasks" | "chat";
+type NavItem = {
+  path: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
 
-interface AppNavProps {
-  currentRoute: Route;
-  onNavigate: (route: Route) => void;
-}
+export default function AppNav() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-export default function AppNav({ currentRoute, onNavigate }: AppNavProps) {
-  const navItems = [
-    { route: "dashboard" as Route, label: "Dashboard", icon: LayoutDashboard },
-    { route: "plan/academics" as Route, label: "Academic Plan", icon: BookOpen },
-    { route: "plan/career" as Route, label: "Career Plan", icon: Target },
-    { route: "tasks" as Route, label: "Tasks", icon: ListTodo },
-    { route: "chat" as Route, label: "Advisor", icon: MessageSquare },
+  const navItems: NavItem[] = [
+    { path: "/app/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { path: "/app/plan/academics", label: "Academic Plan", icon: BookOpen },
+    { path: "/app/plan/career", label: "Career Plan", icon: Target },
+    { path: "/app/tasks", label: "Tasks", icon: ListTodo },
+    { path: "/app/chat", label: "Advisor", icon: MessageSquare },
   ];
+
+  const isActivePath = (path: string) => {
+    // exact match works for your current routes
+    // (you can broaden this later with startsWith)
+    return location.pathname === path;
+  };
 
   return (
     <header className="border-b bg-white sticky top-0 z-10">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => navigate("/app/dashboard")}
+            className="flex items-center gap-2"
+          >
             <img src={logo} alt="ThinkPath" className="size-8" />
             <span className="text-lg">ThinkPath</span>
-          </div>
+          </button>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = currentRoute === item.route;
+              const active = isActivePath(item.path);
+
               return (
                 <Button
-                  key={item.route}
-                  variant={isActive ? "secondary" : "ghost"}
+                  key={item.path}
+                  variant={active ? "secondary" : "ghost"}
                   size="sm"
-                  onClick={() => onNavigate(item.route)}
+                  onClick={() => navigate(item.path)}
                   className="gap-2"
                 >
                   <Icon className="size-4" />
@@ -58,13 +72,14 @@ export default function AppNav({ currentRoute, onNavigate }: AppNavProps) {
         <nav className="md:hidden flex items-center gap-1 mt-2 overflow-x-auto pb-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = currentRoute === item.route;
+            const active = isActivePath(item.path);
+
             return (
               <Button
-                key={item.route}
-                variant={isActive ? "secondary" : "ghost"}
+                key={item.path}
+                variant={active ? "secondary" : "ghost"}
                 size="sm"
-                onClick={() => onNavigate(item.route)}
+                onClick={() => navigate(item.path)}
                 className="gap-2 flex-shrink-0"
               >
                 <Icon className="size-4" />

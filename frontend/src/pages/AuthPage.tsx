@@ -1,24 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { Card } from "../components/ui/card";
 import logo from "../assets/logo.png";
 import { SignIn, SignUp } from "@clerk/clerk-react";
 
-type Route =
-  | "landing"
-  | "login"
-  | "signup"
-  | "onboarding"
-  | "dashboard"
-  | "plan/academics"
-  | "plan/career"
-  | "tasks"
-  | "chat";
+export default function AuthPage({ mode }: { mode: "login" | "signup" }) {
+  const navigate = useNavigate();
 
-interface AuthPageProps {
-  mode: "login" | "signup";
-  onNavigate: (route: Route) => void;
-}
-
-export default function AuthPage({ mode, onNavigate }: AuthPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8">
@@ -30,15 +17,17 @@ export default function AuthPage({ mode, onNavigate }: AuthPageProps) {
         <div className="flex justify-center">
           {mode === "login" ? (
             <SignIn
-              routing="hash"
-              afterSignInUrl="/#/app/dashboard"
-              signUpUrl="/#/signup"
+              routing="path"
+              path="/login"
+              afterSignInUrl="/app/dashboard"
+              signUpUrl="/signup"
             />
           ) : (
             <SignUp
-              routing="hash"
-              afterSignUpUrl="/#/app/onboarding"
-              signInUrl="/#/login"
+              routing="path"
+              path="/signup"
+              afterSignUpUrl="/app/onboarding"
+              signInUrl="/login"
             />
           )}
         </div>
@@ -49,7 +38,7 @@ export default function AuthPage({ mode, onNavigate }: AuthPageProps) {
               Already have an account?{" "}
               <button
                 type="button"
-                onClick={() => onNavigate("login")}
+                onClick={() => navigate("/login")}
                 className="text-primary hover:underline"
               >
                 Log in
@@ -60,7 +49,7 @@ export default function AuthPage({ mode, onNavigate }: AuthPageProps) {
               Don&apos;t have an account?{" "}
               <button
                 type="button"
-                onClick={() => onNavigate("signup")}
+                onClick={() => navigate("/signup")}
                 className="text-primary hover:underline"
               >
                 Sign up
