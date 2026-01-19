@@ -28,28 +28,34 @@ def health():
     return {"status": "good"}
 
 @app.get("/me")
-def me(
-    claims=Depends(get_clerk_claims),
-    db: Session = Depends(get_db),
-):
+def me(claims=Depends(get_clerk_claims), db: Session = Depends(get_db)):
     clerk_user_id = claims.get("sub")
-    if not clerk_user_id:
-        raise HTTPException(status_code=401, detail="Invalid token (missing sub)")
+    email = claims.get("email")
+    email_verified = bool(claims.get("email_verified", False))
 
     user = db.query(User).filter(User.clerk_user_id == clerk_user_id).first()
 
-    if user is None:
-        raise HTTPException(
-            status_code=403,
-            detail="No ThinkPath account found. Please sign up with an invite code.",
-        )
+    if not user:
+        # auto-allow umbc.edu users
+        if email and email_verified and email.lower().endswith("@umbc.edu"):
+            user = User(
+                clerk_user_id=clerk_user_id,
+                email=email,
+                email_verified=True,
+                onboarding_completed=False,
+            )
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+        else:
+            raise HTTPException(403, "Invite required")
 
     return {
         "id": str(user.id),
         "email": user.email,
-        "email_verified": user.email_verified,
-        "clerk_user_id": user.clerk_user_id,
+        "needs_onboarding": not user.onboarding_completed,
     }
+
 
 class InviteSignupRequest(BaseModel):
     code: str
@@ -92,3 +98,13 @@ def signup_with_invite(
 
     db.commit()
     return {"ok": True, "message": "Account created."}
+
+@app.post("/onboarding/complete")
+def onboarding_complete(claims=Depends(get_clerk_claims), db: Session = Depends(get_db)):
+    clerk_user_id = claims.get("sub")
+    user = db.query(User).filter(User.clerk_user_id == clerk_user_id).first()
+    if not user:
+        raise HTTPException(403, "Invite required")
+    user.onboarding_completed = True
+    db.commit()
+    return {"ok": True}
