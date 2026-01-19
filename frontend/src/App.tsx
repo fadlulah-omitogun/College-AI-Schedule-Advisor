@@ -71,7 +71,10 @@ export default function App() {
           </SignedIn>
         }
       />
-
+      <Route
+        path="/invite"
+        element={<Navigate to="/signup" replace />}
+      />
       {/* Protected app */}
       <Route
         path="/app"

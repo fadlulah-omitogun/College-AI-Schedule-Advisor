@@ -12,7 +12,7 @@ export default function Protected({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const run = async () => {
-      if (!isLoaded) return;
+      if (!isLoaded) return <div className="p-6 text-muted-foreground">Loading…</div>;
 
       if (!isSignedIn) {
         setAllowed(false);
@@ -63,8 +63,8 @@ export default function Protected({ children }: { children: React.ReactNode }) {
     run();
   }, [isLoaded, isSignedIn, getToken, navigate, location.pathname]);
 
-  if (!isLoaded) return null;
-  if (!allowed) return null;
+  if (!isLoaded) return <div className="p-6 text-muted-foreground">Loading…</div>;
+  if (!allowed) return <div className="p-6 text-muted-foreground">Checking access…</div>;
 
   return <>{children}</>;
 }

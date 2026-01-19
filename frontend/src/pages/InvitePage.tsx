@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 // import AppNav from "../components/AppNav";
 import { Card } from "../components/ui/card";
@@ -10,6 +11,7 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 
 export default function InvitePage() {
+
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +48,23 @@ export default function InvitePage() {
       setLoading(false);
     }
   };
+
+useEffect(() => {
+  const run = async () => {
+    const token = await getToken();
+    const res = await fetch("http://127.0.0.1:8000/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!res.ok) return; // 403 -> stay
+
+    const data = await res.json();
+    if (data.needs_onboarding) navigate("/app/onboarding", { replace: true });
+    else navigate("/app/dashboard", { replace: true });
+  };
+
+  run();
+}, [getToken, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">

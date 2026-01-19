@@ -14,7 +14,7 @@ class User(Base):
 
     email: Mapped[str | None] = mapped_column(String, unique=True, index=True, nullable=True)
     email_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-
+    onboarding_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
 
 class InviteCode(Base):
