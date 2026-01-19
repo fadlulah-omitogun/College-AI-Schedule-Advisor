@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-
+import PostAuth from "./pages/PostAuth";
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
 import OnboardingWizard from "./pages/OnboardingWizard";
@@ -52,6 +52,15 @@ export default function App() {
           </PublicOnly>
         }
       />
+
+      <Route 
+        path="/post-auth"
+        element={
+          <SignedIn>
+            <PostAuth />
+          </SignedIn>
+      } />
+
 
       {/* Invite page should be accessible to signed-in users who are blocked */}
       <Route

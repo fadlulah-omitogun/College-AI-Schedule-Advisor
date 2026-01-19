@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
@@ -32,7 +33,7 @@ interface OnboardingData {
 
 export default function OnboardingWizard() {
   const navigate = useNavigate();
-
+  const { getToken } = useAuth();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({
     major: "",
@@ -70,22 +71,38 @@ export default function OnboardingWizard() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < 4) {
       setStep(step + 1);
       return;
     }
 
-    // TODO: Replace this with POST /profile later
-    localStorage.setItem("onboardingData", JSON.stringify(data));
+    // STEP 4 FINISHED — FINAL SUBMIT
+    try {
+      const token = await getToken();
 
-    // Go to dashboard
-    navigate("/app/dashboard", { replace: true });
+      await fetch("http://127.0.0.1:8000/onboarding/complete", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Optional: still keep local copy
+      localStorage.setItem("onboardingData", JSON.stringify(data));
+
+      // Go to dashboard
+      navigate("/app/dashboard", { replace: true });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to complete onboarding. Please try again.");
+    }
   };
 
-  const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
+
+    const handleBack = () => {
+      if (step > 1) setStep(step - 1);
+    };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Protected({ children }: { children: React.ReactNode }) {
   const { isLoaded, isSignedIn, getToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function Protected({ children }: { children: React.ReactNode }) {
       });
 
       if (res.status === 403) {
-        toast.error("No ThinkPath account found. Enter an invite code to continue.");
+        toast.error("Invite required. Enter a code to continue.");
         setAllowed(false);
         navigate("/invite", { replace: true });
         return;
@@ -37,11 +39,29 @@ export default function Protected({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      const data = await res.json();
+
+      const needsOnboarding = Boolean(data?.needs_onboarding);
+      const onOnboardingRoute = location.pathname === "/app/onboarding";
+
+      if (needsOnboarding && !onOnboardingRoute) {
+        setAllowed(false);
+        navigate("/app/onboarding", { replace: true });
+        return;
+      }
+
+      // If onboarding is complete and user is sitting on onboarding page, send them out
+      if (!needsOnboarding && onOnboardingRoute) {
+        setAllowed(false);
+        navigate("/app/dashboard", { replace: true });
+        return;
+      }
+
       setAllowed(true);
     };
 
     run();
-  }, [isLoaded, isSignedIn, getToken, navigate]);
+  }, [isLoaded, isSignedIn, getToken, navigate, location.pathname]);
 
   if (!isLoaded) return null;
   if (!allowed) return null;

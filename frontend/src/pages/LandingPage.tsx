@@ -92,7 +92,59 @@ export default function LandingPage() {
           <h2 className="text-center mb-8">Your plan at a glance</h2>
 
           <Card className="p-6 bg-white shadow-xl">
-            {/* ... unchanged ... */}
+            <div className="space-y-6">
+              {/* Mock Dashboard Preview */}
+              <div>
+                <h3 className="mb-4">This Week</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="size-4 rounded border-2 border-gray-400" />
+                    <span className="text-sm">Complete CS 101 Assignment 3</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="size-4 rounded border-2 border-gray-400" />
+                    <span className="text-sm">Update resume with recent project</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="size-4 rounded border-2 border-gray-400" />
+                    <span className="text-sm">Register for Spring 2026 courses</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mock Semester Timeline */}
+              <div>
+                <h3 className="mb-4">Spring 2026 Plan</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <Card className="p-4 bg-blue-50 border-blue-200">
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="text-sm">CS 201: Data Structures</span>
+                      <span className="text-xs text-muted-foreground">4 cr</span>
+                    </div>
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="text-sm">MATH 220: Discrete Math</span>
+                      <span className="text-xs text-muted-foreground">3 cr</span>
+                    </div>
+                    <div className="flex items-start justify-between">
+                      <span className="text-sm">ENG 102: Composition</span>
+                      <span className="text-xs text-muted-foreground">3 cr</span>
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-blue-200">
+                      <span className="text-xs text-muted-foreground">Total: 13 credits • Balanced workload</span>
+                    </div>
+                  </Card>
+                  
+                  <Card className="p-4 bg-green-50 border-green-200">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Target className="size-4 text-green-700" />
+                      <span className="text-sm">Career Milestone</span>
+                    </div>
+                    <p className="text-sm mb-2">Build personal project: Todo app with React</p>
+                    <p className="text-xs text-muted-foreground">Supports goal: Software Engineer</p>
+                  </Card>
+                </div>
+              </div>
+            </div>
           </Card>
         </div>
       </section>

@@ -19,14 +19,14 @@ export default function AuthPage({ mode }: { mode: "login" | "signup" }) {
             <SignIn
               routing="path"
               path="/login"
-              afterSignInUrl="/app/dashboard"
+              afterSignInUrl="/post-auth"
               signUpUrl="/signup"
             />
           ) : (
             <SignUp
               routing="path"
               path="/signup"
-              afterSignUpUrl="/app/onboarding"
+              afterSignUpUrl="/post-auth"
               signInUrl="/login"
             />
           )}

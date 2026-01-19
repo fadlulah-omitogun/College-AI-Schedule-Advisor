@@ -41,7 +41,7 @@ export default function InvitePage() {
       }
 
       toast.success("Access granted! Welcome to ThinkPath.");
-      navigate("/app/dashboard", { replace: true });
+      navigate("/app/onboarding", { replace: true });
     } finally {
       setLoading(false);
     }
