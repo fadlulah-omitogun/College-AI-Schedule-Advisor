@@ -1,0 +1,52 @@
+{
+    "program_name": "Computer Science B.S.",
+    "university": "UMBC",
+    "requirements": [
+        {"name": "core",
+        "count": "number of courses required (~20)",
+        "classes": [
+            "CMSC 201 - Computer Science I"
+        ],
+        "options": []
+        },
+        {
+        "name": "Science",
+        "count": "number of courses required (~5)",
+        "classes": [
+        ],
+        "options": [{
+            "option_name": "Physics",
+            "courses": [
+                "PHYS 121 - General Physics I",
+                "PHYS 122 - General Physics II"
+            ]
+        }]
+        }
+
+    ],
+    "elective_courses": [
+        "CMSC 341 - Data Structures",
+        "CMSC 421 - Operating Systems",
+        "CMSC 481 - Computer Networks"
+    ],
+    "tracks": [
+        {
+            "track_name": "",
+            "required_courses": [
+            ],
+            "elective_courses": [
+                
+            ]
+        },
+        {
+            "track_name": "",
+            "required_courses": [
+
+            ],
+            "elective_courses": [
+                "CS 433 - Cryptography",
+                "CS 434 - Ethical Hacking"
+            ]
+        }
+    ]
+}
